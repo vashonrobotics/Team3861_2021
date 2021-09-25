@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -29,7 +28,6 @@ public class JHopper {
     public void snarfle() {
             jHopMotor.setPower(SNARFLE_POWER);
     }
-
 
     public void stop() {
         jHopMotor.setPower(STOP_POWER);
