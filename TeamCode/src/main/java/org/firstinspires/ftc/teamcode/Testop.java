@@ -18,6 +18,8 @@ public class Testop extends LinearOpMode {
 
         testMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        waitForStart();
+        
         testMotor.setPower(0.5);
         sleep(1000);
         testMotor.setPower(0);
