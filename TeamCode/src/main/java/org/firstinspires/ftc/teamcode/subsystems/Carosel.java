@@ -25,14 +25,14 @@ public class Carosel {
     }
 
     public void IncreasePower() {
-        if (Power >= 0.90) {
+        if (Power <= 0.90) {
             Power += 0.10;
             caroselMotor.setPower(Power);
         }
     }
 
     public void DecreasePower() {
-        if (Power <= 0.10) {
+        if (Power >= 0.10) {
             Power -= 0.10;
             caroselMotor.setPower(Power);
         }
