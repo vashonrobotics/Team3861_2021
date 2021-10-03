@@ -11,6 +11,9 @@ import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 @TeleOp(name = "Teleop")
 public class Teleop extends LinearOpMode {
 
+    boolean was_dpad_left = false;
+    boolean was_dpad_right = false;
+
     Carosel Carousel = null;
 
     @Override
@@ -29,12 +32,16 @@ public class Teleop extends LinearOpMode {
             if (gamepad1.dpad_down) {
                 Carousel.PowerOff();
             }
-            if (gamepad1.dpad_left) {
+
+            if (gamepad1.dpad_left && !was_dpad_left) {
                 Carousel.DecreasePower();
             }
-            if (gamepad1.dpad_right) {
+            was_dpad_left = gamepad1.dpad_left;
+
+            if (gamepad1.dpad_right && !was_dpad_right) {
                 Carousel.IncreasePower();
             }
+            was_dpad_right = gamepad1.dpad_right;
         }
     }
 }
