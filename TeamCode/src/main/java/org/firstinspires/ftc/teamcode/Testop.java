@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 //  It also goes through and explains everything that goes on
 
 
-@Autonomous(name = "Autonomous") // The string here is what the OpMode Shows up as on the phone
+@Autonomous(name = "Testop") // The string here is what the OpMode Shows up as on the phone
                                  // and the @Autonomous declares this OpMode as an Autonomous one
 
 public class Testop extends LinearOpMode { // LinearOpMode is the base of all the OpModes we will be using

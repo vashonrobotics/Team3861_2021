@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-
+@SuppressWarnings("unused") // This looks nice and reduces the amount of warnings the code gives
 public class Carosel {
 
     public double Power = 0.20;
