@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -43,5 +44,15 @@ public class Teleop extends LinearOpMode {
             }
             was_dpad_right = gamepad1.dpad_right;
         }
+
+
+        drive.setWeightedDrivePower(//turning and moving and strafing
+                new Pose2d(
+                        -gamepad1.left_stick_y,
+                        -gamepad1.left_stick_x,
+                        -gamepad1.right_stick_x * scaling
+                )
+        );
+
     }
 }
