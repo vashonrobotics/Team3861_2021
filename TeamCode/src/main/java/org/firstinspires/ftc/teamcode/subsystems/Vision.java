@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
@@ -30,8 +31,7 @@ public class Vision {
     };
 
     private static final String VUFORIA_KEY = // License key, this tells Vuforia that we are licensed to use their code, or something
-            " AfdtDjj/////AAABmSp18qqTqUEYrfASUDj9ojCEPgyv/+3QyV1T/YOsOoFzl7KZtvlusn/W+i4UPgZUCsQdd2xR9Vd1kXR4hoStrTiZrT7KxsuLH+R4lMgjJ3NP0Xx5k9a7cAE4gY2DCbf8SEN/+ewYXiOrk5MrM62OovFMgKU5BDZBw9osYg/QZxGMdBPEJdR7gsDhnGogUrRPcwbsSJkIHpmxycJ9Hf/AdamUprPkV+ta7VDgG8+ZnBXKWMitFenMgv9eXxvY9GFPJm59bP9kXAQAOnZwUPqwtXD/4zr6alQf0N43rAWHaQQ59E3C4JL7XqIxDf+EO3sK9aKmzAQOc9ozJlktK37fld3Ow7OdYMhWiIs37lJ7mAoW";
-
+            "ATX87s7/////AAABmdP75JTOE0ShgAJ1CnEf4ahMNo1qgzeM+u53RnfxoGWfzuBp09/Lua+76wJ4nngpzRbp2O08gMzvknONJiIRBZP7JXlZx87u0NFL1KsSVPAYyHYnMknl4BzgCvRJ5gLzwd8NKcd5PLdUd1eEKRfikRr087Vds6hAlu7YRF9OmmhO2Hi0e1UmOhnWysg0CktFRTITaCW6brYVC1IfHl8R9GB0xgdlcuNztOm0LtOCf48DCsaetn2hlhC7mjWt15CjNFyK7w47M0OovFoghxhf+vtKMxqcyzqQPu3/OqqgPpGboeiNnLvbaChcQ7gCg7W2skUp5/BTZJMqO0oyQceolzUuCrdhf7n+D1dD4h6WPxyS";
     private VuforiaLocalizer vuforia; // Vuforia tells the robot where it is via vision
     private TFObjectDetector tfod; // Tensor Flow Object Detector: It detects objects using the model asset file we send it
 
@@ -42,8 +42,18 @@ public class Vision {
         initTfod(hardwareMap);
     }
 
+    public void init() {
+        if (tfod != null) {
+            tfod.activate();
+
+            // Uncomment the following line if you want to adjust the magnification and/or the aspect ratio of the input images.
+            //tfod.setZoom(2.5, 1.78);
+        }
+    }
+
     @SuppressLint("DefaultLocale")
-    public boolean finder() {
+    public boolean ducktective() {
+        FtcDashboard.start();
         FtcDashboard dashboard = FtcDashboard.getInstance();
         dashboard.setTelemetryTransmissionInterval(25);
 
@@ -61,7 +71,13 @@ public class Vision {
             if (updatedRecognitions != null) {
                 telemetry.addData("# Object Detected", updatedRecognitions.size());
 
-                duckDetected = true;
+                for (Recognition recognition : updatedRecognitions) {
+                    if (recognition.getLabel().equals("Duck")) {
+                        duckDetected = true;
+                    } else if (recognition.getLabel().equals("Marker")) {
+                        duckDetected = false;
+                    }
+                }
 
                 for (Recognition recognition : updatedRecognitions) {
                     packet.put("label", recognition.getLabel());
@@ -92,11 +108,16 @@ public class Vision {
 
     private void initTfod(HardwareMap hardwareMap) {
 
+        String packageName = hardwareMap.appContext.getPackageName();
+        Log.d("packageName: ", packageName);
+
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName()); // ngl, I still don't understand this
+                "tfodMonitorViewId", "id", packageName); // ngl, I still don't understand this
 
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f; // It was already set to 0.4f when we instantiated it. Why are we increasing it?
+        tfodParameters.isModelTensorFlow2 = true;
+        tfodParameters.inputSize = 320;
 
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
