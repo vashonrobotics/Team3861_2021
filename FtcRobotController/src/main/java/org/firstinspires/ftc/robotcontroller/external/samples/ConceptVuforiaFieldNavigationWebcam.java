@@ -217,6 +217,7 @@ public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode {
          * Either press STOP to exit the OpMode, or use the "options menu" again, and select "Camera Stream" to close the preview window.
          */
 
+
         targets.activate();
         while (!isStopRequested()) {
 
@@ -253,7 +254,6 @@ public class ConceptVuforiaFieldNavigationWebcam extends LinearOpMode {
             }
             telemetry.update();
         }
-
         // Disable Tracking when we are done;
         targets.deactivate();
     }

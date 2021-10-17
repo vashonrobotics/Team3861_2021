@@ -9,9 +9,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Carosel {
 
     public double Power = 0.20;
-    public double Stop = 0;
 
-    private DcMotor caroselMotor;
+    private final DcMotor caroselMotor;
 
     public Carosel(HardwareMap HardwareMap) {
         caroselMotor = HardwareMap.get(DcMotorEx.class, "caroselMotor");
@@ -39,7 +38,7 @@ public class Carosel {
     }
 
     public void PowerOff() {
-        caroselMotor.setPower(Stop);
+        caroselMotor.setPower(0);
     }
 }
 
