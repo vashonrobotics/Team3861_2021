@@ -81,6 +81,5 @@ public class AutonomousOpMode extends LinearOpMode {
 
 
         // Move to warehouse
-        */
     }
 }

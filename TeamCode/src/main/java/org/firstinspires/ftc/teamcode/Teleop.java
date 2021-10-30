@@ -4,17 +4,13 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.DriveFactory;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 import org.firstinspires.ftc.teamcode.subsystems.Lifter;
 
-
-
-
-
+// import com.qualcomm.robotcore.hardware.DcMotor;
 //import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
 
@@ -64,20 +60,6 @@ public class Teleop extends LinearOpMode {
             }
             was_dpad_right = gamepad1.dpad_right;
 
-
-
-            drive.setWeightedDrivePower(//turning and moving and strafing
-                    new Pose2d(
-                            -gamepad1.left_stick_y,
-                            -gamepad1.left_stick_x,
-                            -gamepad1.right_stick_x
-                    )
-            );
-           // telemetry.addData("Status", "Run Time: " + runtime.toString());
-            //telemetry.addData("FrontMotors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
-            //telemetry.addData("RearMotors", "left (%.2f), right (%.2f)", leftRearPower, rightRearPower);
-            //telemetry.update();
-
             if (gamepad1.x) {
                 lifter.slap();
             }
@@ -94,13 +76,18 @@ public class Teleop extends LinearOpMode {
                 lifter.nothingHex();
             }
 
+            drive.setWeightedDrivePower(//turning and moving and strafing
+                    new Pose2d(
+                            -gamepad1.left_stick_y,
+                            -gamepad1.left_stick_x,
+                            -gamepad1.right_stick_x
+                    )
+            );
 
-
+            // telemetry.addData("Status", "Run Time: " + runtime.toString());
+            //telemetry.addData("FrontMotors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
+            //telemetry.addData("RearMotors", "left (%.2f), right (%.2f)", leftRearPower, rightRearPower);
+            //telemetry.update();
         }
-
-
-
-
-
     }
 }

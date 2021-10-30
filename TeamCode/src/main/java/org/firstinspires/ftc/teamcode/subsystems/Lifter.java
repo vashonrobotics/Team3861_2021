@@ -59,12 +59,5 @@ public class Lifter {
         lifterMotor.setPower(0);
 
     }
-
-
-
-
-
-
-
 }
 
