@@ -80,9 +80,8 @@ public class Vision {
 
     @SuppressLint("DefaultLocale")
     public boolean ducktective() {
-        FtcDashboard.start();
         FtcDashboard dashboard = FtcDashboard.getInstance();
-        dashboard.setTelemetryTransmissionInterval(25);
+        // dashboard.setTelemetryTransmissionInterval(25);
 
         boolean duckDetected = false;
 

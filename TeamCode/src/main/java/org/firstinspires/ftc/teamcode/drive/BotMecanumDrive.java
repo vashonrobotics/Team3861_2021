@@ -92,9 +92,10 @@ public class BotMecanumDrive extends BaseBotMecanumDrive {
 
     private Pose2d lastPoseOnTurn;
 
-    public BotMecanumDrive(HardwareMap hardwareMap, VuforiaLocalizer vuforia) {
+    public BotMecanumDrive(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
 
+        FtcDashboard.start();
         dashboard = FtcDashboard.getInstance();
         //dashboard.setTelemetryTransmissionInterval(25);
 
@@ -155,6 +156,10 @@ public class BotMecanumDrive extends BaseBotMecanumDrive {
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: if desired, use setLocalizer() to change the localization method
+    }
+
+    @Override
+    public void setVisionLocalizer(VuforiaLocalizer vuforia) {
         setLocalizer(new VisionLocalizer(dashboard.getTelemetry(), vuforia));
     }
 

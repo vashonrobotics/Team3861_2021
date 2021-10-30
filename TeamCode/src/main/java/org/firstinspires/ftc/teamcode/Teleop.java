@@ -30,7 +30,7 @@ public class Teleop extends LinearOpMode {
         Vision vision = new Vision(this, hardwareMap, telemetry);
         vision.init();
 
-        drive = DriveFactory.getDrive(hardwareMap, vision.getVuforia());
+        drive = DriveFactory.getDrive(hardwareMap);
         Carousel = new Carosel(hardwareMap);
 
         waitForStart();
@@ -63,6 +63,8 @@ public class Teleop extends LinearOpMode {
                             -gamepad1.right_stick_x
                     )
             );
+
+
            // telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("FrontMotors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
             //telemetry.addData("RearMotors", "left (%.2f), right (%.2f)", leftRearPower, rightRearPower);

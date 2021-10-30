@@ -1,13 +1,17 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.drive.Drive;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
+import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.BotMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.DriveFactory;
+import org.firstinspires.ftc.teamcode.drive.VisionLocalizer;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 import org.firstinspires.ftc.teamcode.util.AssetsTrajectoryManager;
@@ -27,13 +31,14 @@ public class AutonomousOpMode extends LinearOpMode {
         vision = new Vision(this, hardwareMap, telemetry);
         vision.init();
 
-        drive = DriveFactory.getDrive(hardwareMap, vision.getVuforia());
+        drive = DriveFactory.getDrive(hardwareMap);
+        drive.setVisionLocalizer(vision.getVuforia());
 
         carousel = new Carosel(hardwareMap);
 
 
-        testTrajectory = AssetsTrajectoryManager.load("simpleForward");
-
+        // testTrajectory = AssetsTrajectoryManager.load("simpleForward");
+        testTrajectory = drive.trajectoryBuilder(drive.getPoseEstimate()).forward(20).build();
 
         waitForStart();
 
