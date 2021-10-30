@@ -29,6 +29,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 
@@ -153,6 +154,11 @@ public class ProgrammerBotMecanumDrive extends BaseBotMecanumDrive {
 
         // TODO: if desired, use setLocalizer() to change the localization method
         setLocalizer(new ProgrammerOdometryLocalizer(hardwareMap));
+    }
+
+    @Override
+    public void setVisionLocalizer(VuforiaLocalizer vuforia) {
+
     }
 
     public TrajectoryBuilder trajectoryBuilder(Pose2d startPose) {

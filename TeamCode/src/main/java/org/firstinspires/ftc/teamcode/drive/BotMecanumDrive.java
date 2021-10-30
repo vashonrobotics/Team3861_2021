@@ -29,7 +29,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.qualcomm.robotcore.util.RobotLog;
+import com.vuforia.Vuforia;
 
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.teamcode.util.DashboardUtil;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 
@@ -93,6 +95,7 @@ public class BotMecanumDrive extends BaseBotMecanumDrive {
     public BotMecanumDrive(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
 
+        FtcDashboard.start();
         dashboard = FtcDashboard.getInstance();
         //dashboard.setTelemetryTransmissionInterval(25);
 
@@ -153,7 +156,11 @@ public class BotMecanumDrive extends BaseBotMecanumDrive {
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: if desired, use setLocalizer() to change the localization method
-        setLocalizer(new OdometryLocalizer(hardwareMap));
+    }
+
+    @Override
+    public void setVisionLocalizer(VuforiaLocalizer vuforia) {
+        setLocalizer(new VisionLocalizer(dashboard.getTelemetry(), vuforia));
     }
 
     @Override
