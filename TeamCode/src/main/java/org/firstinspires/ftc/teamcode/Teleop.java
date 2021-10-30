@@ -7,7 +7,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.DriveFactory;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
+
+
+
 //import org.firstinspires.ftc.teamcode.subsystems.Vision;
+
 
 @TeleOp(name = "Teleop")
 public class Teleop extends LinearOpMode {
@@ -67,5 +71,11 @@ public class Teleop extends LinearOpMode {
             //telemetry.addData("RearMotors", "left (%.2f), right (%.2f)", leftRearPower, rightRearPower);
             //telemetry.update();
         }
+
+        //if (gamepad1.x){
+
+      //  }
     }
+
+
 }
