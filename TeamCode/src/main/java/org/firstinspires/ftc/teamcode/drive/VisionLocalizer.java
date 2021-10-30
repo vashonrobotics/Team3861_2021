@@ -38,10 +38,11 @@ public class VisionLocalizer implements Localizer {
 
     private OpenGLMatrix lastLocation = null;
     private VuforiaLocalizer vuforia; // Vuforia tells the robot where it is via vision
-    private VuforiaTrackables targets; // These are the targets we are looking for
+    private final VuforiaTrackables targets; // These are the targets we are looking for
 
     private boolean targetVisible = false;
     private Pose2d poseEstimate;
+    // private Pose2d _poseEstimate;
 
     public VisionLocalizer(Telemetry telemetry, VuforiaLocalizer vuforia) {
 
@@ -52,8 +53,7 @@ public class VisionLocalizer implements Localizer {
 
         targets = this.vuforia.loadTrackablesFromAsset("FreightFrenzy");
 
-        List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>();
-        allTrackables.addAll(targets);
+        List<VuforiaTrackable> allTrackables = new ArrayList<VuforiaTrackable>(targets);
 
         identifyTarget(0, "Blue Storage", -halfField, oneAndHalfTile, mmTargetHeight, 90, 0, 90);
         identifyTarget(1, "Blue Alliance Wall", halfTile, halfField, mmTargetHeight, 90, 0, 0);
@@ -107,6 +107,9 @@ public class VisionLocalizer implements Localizer {
             // express the rotation of the robot in degrees.
             Orientation rotation = Orientation.getOrientation(lastLocation, EXTRINSIC, XYZ, DEGREES);
             telemetry.addData("Rot (deg)", "{Roll, Pitch, Heading} = %.0f, %.0f, %.0f", rotation.firstAngle, rotation.secondAngle, rotation.thirdAngle);
+
+            // _poseEstimate = poseEstimate;
+            poseEstimate = new Pose2d(translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, rotation.thirdAngle);
         } else {
             telemetry.addData("Visible Target", "none");
         }

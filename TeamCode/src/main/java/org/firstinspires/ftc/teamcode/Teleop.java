@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.DriveFactory;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
+import org.firstinspires.ftc.teamcode.subsystems.Vision;
 //import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
 @TeleOp(name = "Teleop")
@@ -26,10 +27,10 @@ public class Teleop extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-       // Vision vision = new Vision(this, hardwareMap, telemetry);
-       // vision.init();
+        Vision vision = new Vision(this, hardwareMap, telemetry);
+        vision.init();
 
-        drive = DriveFactory.getDrive(hardwareMap);
+        drive = DriveFactory.getDrive(hardwareMap, vision.getVuforia());
         Carousel = new Carosel(hardwareMap);
 
         waitForStart();
