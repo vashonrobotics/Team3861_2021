@@ -13,15 +13,15 @@ public class Carosel {
     public double Power = 0.20;
 
     private final DcMotor caroselMotor;
-    //DigitalChannel digitalTouch;
+    public DigitalChannel digitalTouch;
 
     public Carosel(HardwareMap HardwareMap) {
         caroselMotor = HardwareMap.get(DcMotorEx.class, "caroselMotor");
-        //digitalTouch = HardwareMap.get(DigitalChannel.class, "sensor_digital");
+        digitalTouch = HardwareMap.get(DigitalChannel.class, "sensor_digital");
 
         caroselMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         caroselMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
     }
 
 

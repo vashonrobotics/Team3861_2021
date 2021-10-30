@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveFactory;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
+
 @Autonomous(name = "Autonomous")
 public class AutonomousOpMode extends LinearOpMode {
 
@@ -25,7 +26,7 @@ public class AutonomousOpMode extends LinearOpMode {
 
         drive = DriveFactory.getDrive(hardwareMap);
 
-        carousel = new Carosel(hardwareMap);
+       Carosel carosel = new Carosel(hardwareMap);
 
         waitForStart();
         // Move to scan
@@ -44,12 +45,23 @@ public class AutonomousOpMode extends LinearOpMode {
         // Place block at correct level
 
         // Move to carosel
+
+        if (carosel.digitalTouch.getState() == true) {
+            telemetry.addData("Digital Touch", "Is Not Pressed");
+            sleep(1000);
+            carosel.PowerOn();
+        } else {
+            telemetry.addData("Digital Touch", "Is Pressed");
+            carousel.PowerOff();
+        }
+
+        /*telemetry.update();
         carousel.PowerOn();
         for (int i = 0; i < 3; i++) {
             carousel.IncreasePower();
             sleep(500);
-        }
-        carousel.PowerOff();
+        }*/
+
 
         // Move to warehouse
     }

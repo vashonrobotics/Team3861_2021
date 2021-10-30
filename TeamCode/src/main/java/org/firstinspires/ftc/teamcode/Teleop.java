@@ -4,9 +4,14 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.DriveFactory;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
+import org.firstinspires.ftc.teamcode.subsystems.Lifter;
+
+
 
 
 
@@ -17,7 +22,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 public class Teleop extends LinearOpMode {
 
 
-    BaseBotMecanumDrive drive= null;
+    BaseBotMecanumDrive drive = null;
 
     boolean was_dpad_left = false;
     boolean was_dpad_right = false;
@@ -30,11 +35,13 @@ public class Teleop extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-       // Vision vision = new Vision(this, hardwareMap, telemetry);
-       // vision.init();
+        // Vision vision = new Vision(this, hardwareMap, telemetry);
+        // vision.init();
 
         drive = DriveFactory.getDrive(hardwareMap);
-        Carousel = new Carosel(hardwareMap);
+        Carosel carosel = new Carosel(hardwareMap);
+        Lifter lifter = new Lifter(hardwareMap);
+
 
         waitForStart();
 
@@ -58,7 +65,6 @@ public class Teleop extends LinearOpMode {
             was_dpad_right = gamepad1.dpad_right;
 
 
-
             drive.setWeightedDrivePower(//turning and moving and strafing
                     new Pose2d(
                             -gamepad1.left_stick_y,
@@ -66,16 +72,34 @@ public class Teleop extends LinearOpMode {
                             -gamepad1.right_stick_x
                     )
             );
-           // telemetry.addData("Status", "Run Time: " + runtime.toString());
+            // telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("FrontMotors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
             //telemetry.addData("RearMotors", "left (%.2f), right (%.2f)", leftRearPower, rightRearPower);
             //telemetry.update();
+
+            if (gamepad1.x) {
+                lifter.slap();
+            }
+
+            if (gamepad1.y) {
+
+                lifter.home();
+            }
+            if (gamepad1.a){
+                lifter.setPowerHex();
+            }
+
+            if (gamepad1.b){
+                lifter.nothingHex();
+            }
+
+
+
         }
 
-        //if (gamepad1.x){
 
-      //  }
+
+
+
     }
-
-
 }

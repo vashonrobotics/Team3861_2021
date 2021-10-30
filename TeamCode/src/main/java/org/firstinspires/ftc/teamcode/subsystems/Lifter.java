@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+//import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
+//import com.qualcomm.robotcore.hardware.DcMotorSimple;
+//import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -17,7 +19,7 @@ public class Lifter {
     public Lifter(HardwareMap HardwareMap) {
         lifterMotor = HardwareMap.get(DcMotorEx.class, "lifterMotor");
 
-        lifterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        lifterMotor.setDirection(DcMotor.Direction.FORWARD);
         lifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         slapMotor = HardwareMap.get(Servo.class, "slapMotor");
@@ -42,6 +44,25 @@ public class Lifter {
             hasRun = true;
         }
     }
+    public void home() {
+        if (System.currentTimeMillis() - setTime > 10000 && !hasRun) {
+            //Will only run after 10 seconds, and will only run onc
+            slapMotor.setPosition(LOAD_POSITION);
+            hasRun = true;
+        }
+    }
+    public void setPowerHex(){
+            lifterMotor.setPower(0.6);
+        }
+
+    public void nothingHex(){
+        lifterMotor.setPower(0);
+
+    }
+
+
+
+
 
 
 
