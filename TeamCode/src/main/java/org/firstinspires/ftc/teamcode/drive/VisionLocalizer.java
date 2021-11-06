@@ -8,6 +8,9 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.drive.MecanumDrive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.Localizer;
 
@@ -40,14 +43,18 @@ public class VisionLocalizer implements Localizer {
     private VuforiaLocalizer vuforia; // Vuforia tells the robot where it is via vision
     private final VuforiaTrackables targets; // These are the targets we are looking for
 
+    MecanumDrive.MecanumLocalizer backupLocalizer;
+
     private boolean targetVisible = false;
     private Pose2d poseEstimate;
     // private Pose2d _poseEstimate;
 
-    public VisionLocalizer(Telemetry telemetry, VuforiaLocalizer vuforia) {
+    public VisionLocalizer(Telemetry telemetry, VuforiaLocalizer vuforia, BotMecanumDrive drive) {
 
         this.telemetry = telemetry;
         this.vuforia = vuforia;
+
+        backupLocalizer = new MecanumDrive.MecanumLocalizer(drive);
 
         // Targets
 
@@ -79,13 +86,14 @@ public class VisionLocalizer implements Localizer {
 
     public void update() {
         targets.activate();
-
+        // TelemetryPacket packet = new TelemetryPacket();
         // check all the trackable targets to see which one (if any) is visible.
         targetVisible = false;
         for (VuforiaTrackable trackable : allTrackables) {
             if (((VuforiaTrackableDefaultListener) trackable.getListener()).isVisible()) {
                 telemetry.addData("Visible Target", trackable.getName());
                 targetVisible = true;
+                // packet.put("Target", trackable.getName());
 
                 // getUpdatedRobotLocation() will return null if no new information is available since
                 // the last time that call was made, or if the trackable is not currently visible.
@@ -101,6 +109,7 @@ public class VisionLocalizer implements Localizer {
         if (targetVisible) {
             // express position (translation) of robot in inches.
             VectorF translation = lastLocation.getTranslation();
+
             telemetry.addData("Pos (inches)", "{X, Y, Z} = %.1f, %.1f, %.1f",
                     translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, translation.get(2) / mmPerInch);
 
@@ -112,8 +121,14 @@ public class VisionLocalizer implements Localizer {
             poseEstimate = new Pose2d(translation.get(0) / mmPerInch, translation.get(1) / mmPerInch, rotation.thirdAngle);
         } else {
             telemetry.addData("Visible Target", "none");
+            backupLocalizer.update();
+            poseEstimate = backupLocalizer.getPoseEstimate();
+            // change pose estimate to what ever the
         }
+        // FtcDashboard.getInstance().sendTelemetryPacket(packet);
+        backupLocalizer.setPoseEstimate(poseEstimate);
         telemetry.update();
+
         targets.deactivate();
     }
 

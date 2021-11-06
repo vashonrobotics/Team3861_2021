@@ -156,11 +156,12 @@ public class BotMecanumDrive extends BaseBotMecanumDrive {
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: if desired, use setLocalizer() to change the localization method
+        setLocalizer(new MecanumLocalizer(this));
     }
 
     @Override
     public void setVisionLocalizer(VuforiaLocalizer vuforia) {
-        setLocalizer(new VisionLocalizer(dashboard.getTelemetry(), vuforia));
+        setLocalizer(new VisionLocalizer(dashboard.getTelemetry(), vuforia, this));
     }
 
     @Override

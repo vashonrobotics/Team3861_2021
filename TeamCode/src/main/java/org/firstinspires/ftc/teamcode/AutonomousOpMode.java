@@ -33,7 +33,7 @@ public class AutonomousOpMode extends LinearOpMode {
         vision.init();
 
         drive = DriveFactory.getDrive(hardwareMap);
-        drive.setVisionLocalizer(vision.getVuforia());
+        // drive.setVisionLocalizer(vision.getVuforia());
 
        Carosel carosel = new Carosel(hardwareMap);
 
