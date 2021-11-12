@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.drive.DriveFactory;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
-@Autonomous(name = "BlueAutonomous")
+@Autonomous(name = "RedAutonomous")
 public class RedAutonomous extends LinearOpMode {
 
     Vision vision = null;
@@ -27,14 +27,14 @@ public class RedAutonomous extends LinearOpMode {
         // drive.setVisionLocalizer(vision.getVuforia());
 
         carousel = new Carosel(hardwareMap);
-        carousel.setDirection(DcMotorSimple.Direction.REVERSE);
+        carousel.setDirection(DcMotorSimple.Direction.FORWARD);
 
         waitForStart();
 
         drive.setWeightedDrivePower(new Pose2d(0, 1, 0));
-        sleep(250);
+        sleep(100);
         drive.setWeightedDrivePower(new Pose2d(-0.5, 0, 0.01));
-        sleep(4000);
+        sleep(3800);
         // drive.setWeightedDrivePower(new Pose2d(0,0.05,-0.2));
         // sleep(300);
         drive.setWeightedDrivePower(new Pose2d(0,0,0));
@@ -45,7 +45,7 @@ public class RedAutonomous extends LinearOpMode {
 
         // drive.setWeightedDrivePower(new Pose2d(0,-0.05,0.2));
         // sleep(450);
-        drive.setWeightedDrivePower(new Pose2d(1, -0.2, -0.025));
+        drive.setWeightedDrivePower(new Pose2d(1, -0.05, -0.025));
         sleep(3400);
         drive.setWeightedDrivePower(new Pose2d(0,0,0));
     }
