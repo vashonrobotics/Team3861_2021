@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
@@ -24,6 +25,8 @@ public class Teleop extends LinearOpMode {
     boolean was_dpad_right = false;
 
     Carosel Carousel = null;
+    private boolean was_x;
+    private boolean was_y;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -35,7 +38,7 @@ public class Teleop extends LinearOpMode {
        // vision.init();
 
         drive = DriveFactory.getDrive(hardwareMap);
-        Carosel carosel = new Carosel(hardwareMap);
+        Carosel carousel = new Carosel(hardwareMap);
         Lifter lifter = new Lifter(hardwareMap);
 
 
@@ -43,36 +46,38 @@ public class Teleop extends LinearOpMode {
 
         while (!isStopRequested()) {
 
-            if (gamepad1.dpad_up) {
-                Carousel.PowerOn();
+            if (gamepad2.dpad_up) {
+                carousel.PowerOn();
             }
-            if (gamepad1.dpad_down) {
-                Carousel.PowerOff();
+            if (gamepad2.dpad_down) {
+                carousel.PowerOff();
             }
 
-            if (gamepad1.dpad_left && !was_dpad_left) {
-                Carousel.DecreasePower();
+            if (gamepad2.dpad_left && !was_dpad_left) {
+                carousel.setDirection(DcMotorSimple.Direction.REVERSE);
             }
             was_dpad_left = gamepad1.dpad_left;
 
-            if (gamepad1.dpad_right && !was_dpad_right) {
-                Carousel.IncreasePower();
+            if (gamepad2.dpad_right && !was_dpad_right) {
+                carousel.setDirection(DcMotorSimple.Direction.FORWARD);
             }
             was_dpad_right = gamepad1.dpad_right;
 
-            if (gamepad1.x) {
+            if (gamepad2.x && !was_x) {
                 lifter.slap();
             }
+            was_x = gamepad2.x;
 
-            if (gamepad1.y) {
-
+            if (gamepad2.y && !was_y) {
                 lifter.home();
             }
-            if (gamepad1.a){
+            was_y = gamepad2.y;
+
+            if (gamepad2.a){
                 lifter.setPowerHex();
             }
 
-            if (gamepad1.b){
+            if (gamepad2.b){
                 lifter.nothingHex();
             }
 

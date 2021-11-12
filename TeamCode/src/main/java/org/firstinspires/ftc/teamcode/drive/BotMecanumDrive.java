@@ -95,7 +95,7 @@ public class BotMecanumDrive extends BaseBotMecanumDrive {
     public BotMecanumDrive(HardwareMap hardwareMap) {
         super(kV, kA, kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
 
-        FtcDashboard.start();
+        FtcDashboard.start(null);
         dashboard = FtcDashboard.getInstance();
         //dashboard.setTelemetryTransmissionInterval(25);
 
@@ -132,6 +132,11 @@ public class BotMecanumDrive extends BaseBotMecanumDrive {
         leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
         rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+
+        leftFront.setDirection(DcMotor.Direction.REVERSE);
+        rightFront.setDirection(DcMotor.Direction.FORWARD);
+        rightRear.setDirection(DcMotor.Direction.FORWARD);
+        leftRear.setDirection(DcMotor.Direction.REVERSE);
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 

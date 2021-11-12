@@ -13,15 +13,15 @@ public class Carosel {
     public double Power = 0.20;
 
     private final DcMotor caroselMotor;
-    public DigitalChannel digitalTouch;
+    // public DigitalChannel digitalTouch;
 
     public Carosel(HardwareMap HardwareMap) {
         caroselMotor = HardwareMap.get(DcMotorEx.class, "caroselMotor");
-        digitalTouch = HardwareMap.get(DigitalChannel.class, "sensor_digital");
+        // digitalTouch = HardwareMap.get(DigitalChannel.class, "sensor_digital");
 
         caroselMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         caroselMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+        // digitalTouch.setMode(DigitalChannel.Mode.INPUT);
     }
 
 
@@ -29,6 +29,13 @@ public class Carosel {
         caroselMotor.setPower(Power);
     }
 
+    public void PowerOff() {
+        caroselMotor.setPower(0);
+    }
+
+    public void setDirection(DcMotorSimple.Direction direction) {
+        caroselMotor.setDirection(direction);
+    }
     public void IncreasePower() {
         if (Power <= 0.90) {
             Power += 0.10;
@@ -43,9 +50,6 @@ public class Carosel {
         }
     }
 
-    public void PowerOff() {
-        caroselMotor.setPower(0);
-    }
 
     //for while the op mode is active (in teleop, etc)
     //if (digitalTouch.getState() == true) {

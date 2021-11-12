@@ -16,44 +16,49 @@ public class Lifter {
     private final DcMotor lifterMotor;
     private final Servo slapMotor;
 
-    public Lifter(HardwareMap HardwareMap) {
-        lifterMotor = HardwareMap.get(DcMotorEx.class, "lifterMotor");
+    private final double SLAP_POSITION = 1.0;
+    private final double HOME_POSITION = 0.0;
+    double currentPosition;
+
+    // long timeSinceCalled;
+
+    public Lifter(HardwareMap hardwareMap) {
+        lifterMotor = hardwareMap.get(DcMotorEx.class, "lifterMotor");
 
         lifterMotor.setDirection(DcMotor.Direction.FORWARD);
         lifterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        slapMotor = HardwareMap.get(Servo.class, "slapMotor");
+        slapMotor = hardwareMap.get(Servo.class, "slapMotor");
+        slapMotor.setDirection(Servo.Direction.FORWARD);
 
-        slapMotor.setPosition(1.0);
+        slapMotor.getController().pwmEnable();
+        slapMotor.setPosition(0.20);
     }
-
-    private static double DOWN_POSITION = 1.0;
-    private static double HOLD_POSITION = 0.45;
-    private static double UP_POSITION = 0.0;
-    private static double LOAD_POSITION = 1.0;
-
-
-    long setTime = System.currentTimeMillis();
-    boolean hasRun = false;
 
     public void slap() {
-        if (System.currentTimeMillis() - setTime > 10000 && !hasRun) {
-            //Will only run after 10 seconds, and will only run onc
-            slapMotor.setPosition(HOLD_POSITION);
-            slapMotor.setPosition(LOAD_POSITION);
-            hasRun = true;
+        // timeSinceCalled = System.currentTimeMillis();
+        currentPosition = slapMotor.getPosition();
+        currentPosition += 0.20;
+        slapMotor.setPosition(currentPosition);
+        // home();
+        /*
+        while (true) {
+            if (System.currentTimeMillis() - timeSinceCalled > 1000) {
+                home();
+                break;
+            }
         }
+        */
     }
+
     public void home() {
-        if (System.currentTimeMillis() - setTime > 10000 && !hasRun) {
-            //Will only run after 10 seconds, and will only run onc
-            slapMotor.setPosition(LOAD_POSITION);
-            hasRun = true;
-        }
-    }
+        currentPosition = slapMotor.getPosition();
+        currentPosition -= 0.20;
+        slapMotor.setPosition(currentPosition);    }
+
     public void setPowerHex(){
-            lifterMotor.setPower(0.6);
-        }
+        lifterMotor.setPower(0.6);
+    }
 
     public void nothingHex(){
         lifterMotor.setPower(0);
