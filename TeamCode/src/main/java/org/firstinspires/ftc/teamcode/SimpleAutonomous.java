@@ -71,8 +71,9 @@ public class SimpleAutonomous extends LinearOpMode {
 
         waitForStart();
 
+        sleep(22000);
         drive.setWeightedDrivePower(new Pose2d(1, 0, 0));
-        sleep(1000);
+        sleep(3000);
         drive.setWeightedDrivePower(new Pose2d(0,0,0));
 
         // drive.followTrajectory(moveForward);

@@ -31,6 +31,7 @@ public class BlueAutonomous extends LinearOpMode {
 
         waitForStart();
 
+        sleep(3000);
         drive.setWeightedDrivePower(new Pose2d(0, -1, 0));
         sleep(250);
         drive.setWeightedDrivePower(new Pose2d(-0.5, 0, -0.01));

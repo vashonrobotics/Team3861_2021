@@ -31,10 +31,11 @@ public class RedAutonomous extends LinearOpMode {
 
         waitForStart();
 
+        sleep(3000);
         drive.setWeightedDrivePower(new Pose2d(0, 1, 0));
         sleep(100);
         drive.setWeightedDrivePower(new Pose2d(-0.5, 0, 0.01));
-        sleep(3800);
+        sleep(3800); // Change this time
         // drive.setWeightedDrivePower(new Pose2d(0,0.05,-0.2));
         // sleep(300);
         drive.setWeightedDrivePower(new Pose2d(0,0,0));
