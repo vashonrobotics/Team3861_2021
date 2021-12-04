@@ -1,14 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
-import org.firstinspires.ftc.teamcode.drive.DriveFactory;
-import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 import org.firstinspires.ftc.teamcode.subsystems.Lifter;
 
 
@@ -40,11 +34,11 @@ public class AlexTestClass extends LinearOpMode {
                 lifter.home();
             }
             if (gamepad1.a){
-                lifter.setPowerHex();
+                lifter.armBottomLayer();
             }
 
             if (gamepad1.b){
-                lifter.nothingHex();
+                lifter.armDown();
             }
         }
     }

@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -13,8 +11,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 import org.firstinspires.ftc.teamcode.subsystems.Lifter;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
-@Autonomous(name = "BradenTestAutoOp")
-public class BradenTestAutoOp extends LinearOpMode {
+@Autonomous(name = "RedWarehouse")
+public class RedWarehouse extends LinearOpMode {
 
     Vision vision = null;
     Carosel carousel = null;
@@ -38,26 +36,8 @@ public class BradenTestAutoOp extends LinearOpMode {
 
         waitForStart();
 
-        // Direcetional Test
-        /*
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate()).lineTo(new Vector2d(5, 0)).build());
-        sleep(1000);
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate()).lineTo(new Vector2d(-5, 0)).build());
-        sleep(1000);
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate()).lineTo(new Vector2d(0, 5)).build());
-        sleep(1000);
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate()).lineTo(new Vector2d(0, -5)).build());
-
-        // x is forward
-        // y is left
-
-        */
-
-        // Ducktective
-        // lifter.slap();
-
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(6, 0, 0))
+                .lineToLinearHeading(new Pose2d(7, 0, 0))
                 .build());
         sleep(1000);
 
@@ -66,14 +46,10 @@ public class BradenTestAutoOp extends LinearOpMode {
         } else {
             duckFirst = false;
             drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                    .lineToLinearHeading(new Pose2d(6, -6, 0))
+                    .lineToLinearHeading(new Pose2d(7, -6, 0))
                     .build());
             sleep(2000);
-            if (vision.ducktective()) {
-                duckSecond = true;
-            } else {
-                duckSecond = false;
-            }
+            duckSecond = vision.ducktective();
         }
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
@@ -107,32 +83,17 @@ public class BradenTestAutoOp extends LinearOpMode {
         lifter.home();
         lifter.home();
 
+        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(-1, 0, -Math.toRadians(90)))
+                .build());
+
+        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(-1, -27, -Math.toRadians(90)))
+                .build());
+        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Pose2d(27, -27, -Math.toRadians(90)))
+                .build());
+
         vision.shutdown();
-        sleep(3000);
-
-        /*
-        // Carousel
-
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(-23, 0, 0))
-                .build());
-
-        carousel.PowerOn();
-        sleep(4000);
-        carousel.PowerOff();
-
-
-        // Red Storage Unit
-
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineTo(new Vector2d(-30, 36))
-                .build());
-
-        // Blue Storage Unit
-        /*
-        drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineTo(new Vector2d(-28, -36))
-                .build());
-         */
     }
 }

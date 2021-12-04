@@ -83,9 +83,10 @@ public class Vision {
         FtcDashboard dashboard = FtcDashboard.getInstance();
         // dashboard.setTelemetryTransmissionInterval(25);
 
+
         boolean duckDetected = false;
 
-        long DETECTION_TIME = 3000; // How long we give it to determine whether or not there is a duck
+        long DETECTION_TIME = 1000; // How long we give it to determine whether or not there is a duck
         long startTimeMillis = System.currentTimeMillis();
         long deadline = startTimeMillis + DETECTION_TIME;
 
@@ -116,11 +117,14 @@ public class Vision {
                 dashboard.sendTelemetryPacket(packet);
             }
         }
+
+        return duckDetected;
+    }
+
+    public void shutdown () {
         if (tfod != null) {
             tfod.shutdown();
         }
-
-        return duckDetected;
     }
 
     private void initVuforia(HardwareMap hardwareMap, int viewId) {

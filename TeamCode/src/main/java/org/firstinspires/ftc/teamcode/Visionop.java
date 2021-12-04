@@ -19,7 +19,6 @@ public class Visionop extends LinearOpMode {
         motor = hardwareMap.get(DcMotor.class, "testMotor");
 
         Vision vision = new Vision(this, hardwareMap, telemetry);
-        vision.init();
 
         waitForStart();
 

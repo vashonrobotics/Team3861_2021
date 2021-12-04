@@ -11,8 +11,8 @@ import org.firstinspires.ftc.teamcode.drive.DriveFactory;
 import org.firstinspires.ftc.teamcode.subsystems.Carosel;
 import org.firstinspires.ftc.teamcode.subsystems.Vision;
 
-@Autonomous(name = "GetOutDaWayWarehouse")
-public class GetOutDaWayWarehouse extends LinearOpMode {
+@Autonomous(name = "RedGetOutDaWay")
+public class RedGetOutDaWay extends LinearOpMode {
 
     Vision vision = null;
     Carosel carousel = null;
@@ -24,7 +24,6 @@ public class GetOutDaWayWarehouse extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         vision = new Vision(this, hardwareMap, telemetry);
-        vision.init();
 
         drive = DriveFactory.getDrive(hardwareMap);
         // drive.setVisionLocalizer(vision.getVuforia());
@@ -37,15 +36,16 @@ public class GetOutDaWayWarehouse extends LinearOpMode {
                 .build());
 
         // Blue
+        /*
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineTo(new Vector2d(28, -32))
                 .build());
-
+        */
         // Red
-        /*
+
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineTo(new Vector2d(28, -2))
+                .lineTo(new Vector2d(28, 32))
                 .build());
-         */
+
     }
 }

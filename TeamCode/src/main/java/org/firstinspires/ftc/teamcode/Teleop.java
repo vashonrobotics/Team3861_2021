@@ -24,9 +24,8 @@ public class Teleop extends LinearOpMode {
     boolean was_dpad_left = false;
     boolean was_dpad_right = false;
 
-    Carosel Carousel = null;
-    private boolean was_x;
-    private boolean was_y;
+    private boolean was_leftTrigger;
+    private boolean was_rightTrigger;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -63,22 +62,29 @@ public class Teleop extends LinearOpMode {
             }
             was_dpad_right = gamepad1.dpad_right;
 
-            if (gamepad2.x && !was_x) {
-                lifter.slap();
-            }
-            was_x = gamepad2.x;
-
-            if (gamepad2.y && !was_y) {
+            if (gamepad2.left_trigger > 0.1 && !was_leftTrigger) {
                 lifter.home();
             }
-            was_y = gamepad2.y;
+            was_leftTrigger = gamepad2.left_trigger > 0.1;
+
+            if (gamepad2.right_trigger > 0.1 && !was_rightTrigger) {
+                lifter.slap();
+            }
+            was_rightTrigger = gamepad2.right_trigger > 0.1;
+
+            if (gamepad2.y) {
+                lifter.armTopLayer();
+            }
+            if (gamepad2.x) {
+                lifter.armMiddleLayer();
+            }
 
             if (gamepad2.a){
-                lifter.setPowerHex();
+                lifter.armBottomLayer();
             }
 
             if (gamepad2.b){
-                lifter.nothingHex();
+                lifter.armDown();
             }
 
             drive.setWeightedDrivePower(//turning and moving and strafing

@@ -44,7 +44,6 @@ public class SimpleAutonomous extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         vision = new Vision(this, hardwareMap, telemetry);
-        vision.init();
 
         drive = DriveFactory.getDrive(hardwareMap);
         // drive.setVisionLocalizer(vision.getVuforia());
