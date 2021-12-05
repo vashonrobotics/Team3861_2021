@@ -37,7 +37,7 @@ public class RedCarousel extends LinearOpMode {
         waitForStart();
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                .lineToLinearHeading(new Pose2d(7, 0, 0))
+                .lineToLinearHeading(new Pose2d(8, 0, 0))
                 .build());
         sleep(1000);
 
@@ -46,7 +46,7 @@ public class RedCarousel extends LinearOpMode {
         } else {
             duckFirst = false;
             drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
-                    .lineToLinearHeading(new Pose2d(7, -6, 0))
+                    .lineToLinearHeading(new Pose2d(8, -6, 0))
                     .build());
             sleep(1000);
             duckSecond = vision.ducktective();

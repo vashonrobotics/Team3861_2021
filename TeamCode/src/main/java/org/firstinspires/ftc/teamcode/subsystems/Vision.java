@@ -48,12 +48,21 @@ public class Vision {
 
     //TFOD
 
-    private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite"; // contains models of the objects that we scan for
+    // private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite"; // contains models of the objects that we scan for
+    private static final String TFOD_MODEL_ASSET = "TeamShippingElement.tflite";
+
+    /*
     private static final String[] LABELS = {
             "Ball",
             "Cube",
             "Duck",
             "Marker"
+    };
+    */
+
+    private static final String[] LABELS = {
+            "marker",
+            "pi"
     };
 
     private TFObjectDetector tfod; // Tensor Flow Object Detector: It detects objects using the model asset file we send it
@@ -98,10 +107,19 @@ public class Vision {
             if (updatedRecognitions != null) {
                 telemetry.addData("# Object Detected", updatedRecognitions.size());
 
+                /*
                 for (Recognition recognition : updatedRecognitions) {
                     if (recognition.getLabel().equals("Duck")) {
                         duckDetected = true;
                     } else if (recognition.getLabel().equals("Marker")) {
+                        duckDetected = false;
+                    }
+                }
+                 */
+                for (Recognition recognition : updatedRecognitions) {
+                    if (recognition.getLabel().equals("pi")) {
+                        duckDetected = true;
+                    } else if (recognition.getLabel().equals("marker")) {
                         duckDetected = false;
                     }
                 }
