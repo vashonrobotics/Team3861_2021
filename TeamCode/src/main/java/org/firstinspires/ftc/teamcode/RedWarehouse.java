@@ -52,6 +52,7 @@ public class RedWarehouse extends LinearOpMode {
             duckSecond = vision.ducktective();
         }
 
+        sleep(8000);
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineToLinearHeading(new Pose2d(21.5, 23, 0))
                 .build());

@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Carosel {
 
 
-    public double Power = 0.40;
+    public double Power = 1;
 
     private final DcMotor caroselMotor;
     // public DigitalChannel digitalTouch;
