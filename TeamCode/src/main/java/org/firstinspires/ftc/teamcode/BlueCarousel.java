@@ -72,8 +72,7 @@ public class BlueCarousel extends LinearOpMode {
                 .build());
         sleep(1000);
 
-        lifter.slap();
-        lifter.slap();
+        lifter.barf();
         sleep(500);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
@@ -81,8 +80,7 @@ public class BlueCarousel extends LinearOpMode {
                 .build());
 
         lifter.armDown();
-        lifter.home();
-        lifter.home();
+        lifter.intakeStop();
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineToLinearHeading(new Pose2d(0, -25, Math.toRadians(90)))

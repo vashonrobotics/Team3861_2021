@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import android.media.midi.MidiDevice;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 //import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
@@ -16,7 +14,7 @@ public class Lifter {
     //public double Power = 1.0;
 
     private final DcMotor lifterMotor;
-    private final Servo slapMotor;
+    private final DcMotor intakeMotor;
 
     // private int motorPosition = 500;
 
@@ -38,33 +36,22 @@ public class Lifter {
         lifterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-        slapMotor = hardwareMap.get(Servo.class, "slapMotor");
-        slapMotor.setDirection(Servo.Direction.FORWARD);
+        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        slapMotor.getController().pwmEnable();
-        slapMotor.setPosition(0.20);
     }
 
-    public void slap() {
-        // timeSinceCalled = System.currentTimeMillis();
-        currentPosition = slapMotor.getPosition();
-        currentPosition += 0.20;
-        slapMotor.setPosition(currentPosition);
-        // home();
-        /*
-        while (true) {
-            if (System.currentTimeMillis() - timeSinceCalled > 1000) {
-                home();
-                break;
-            }
-        }
-        */
+    public void barf() {
+        intakeMotor.setPower(-1);
     }
 
-    public void home() {
-        currentPosition = slapMotor.getPosition();
-        currentPosition -= 0.20;
-        slapMotor.setPosition(currentPosition);
+    public void intakeStop() {
+        intakeMotor.setPower(0);
+    }
+
+    public void eat() {
+        intakeMotor.setPower(1);
     }
 
     /*

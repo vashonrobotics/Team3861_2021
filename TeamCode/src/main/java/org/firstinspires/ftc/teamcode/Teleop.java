@@ -62,15 +62,13 @@ public class Teleop extends LinearOpMode {
             }
             was_dpad_right = gamepad1.dpad_right;
 
-            if (gamepad2.left_trigger > 0.1 && !was_leftTrigger) {
-                lifter.home();
+            if (gamepad2.left_trigger > 0.1) {
+                lifter.eat();
+            } else if (gamepad2.right_trigger > 0.1) {
+                lifter.barf();
+            } else {
+                lifter.intakeStop();
             }
-            was_leftTrigger = gamepad2.left_trigger > 0.1;
-
-            if (gamepad2.right_trigger > 0.1 && !was_rightTrigger) {
-                lifter.slap();
-            }
-            was_rightTrigger = gamepad2.right_trigger > 0.1;
 
             if (gamepad2.y) {
                 lifter.armTopLayer();

@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -95,8 +94,8 @@ public class BradenTestAutoOp extends LinearOpMode {
                 .build());
         sleep(1000);
 
-        lifter.slap();
-        lifter.slap();
+        lifter.barf();
+        lifter.barf();
         sleep(500);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
@@ -104,8 +103,8 @@ public class BradenTestAutoOp extends LinearOpMode {
                 .build());
 
         lifter.armDown();
-        lifter.home();
-        lifter.home();
+        lifter.intakeStop();
+        lifter.intakeStop();
 
         vision.shutdown();
         sleep(3000);

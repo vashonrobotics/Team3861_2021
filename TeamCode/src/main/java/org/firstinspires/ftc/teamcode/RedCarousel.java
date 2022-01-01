@@ -71,8 +71,7 @@ public class RedCarousel extends LinearOpMode {
                 .build());
         sleep(1000);
 
-        lifter.slap();
-        lifter.slap();
+        lifter.barf();
         sleep(500);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
@@ -80,8 +79,7 @@ public class RedCarousel extends LinearOpMode {
                 .build());
 
         lifter.armDown();
-        lifter.home();
-        lifter.home();
+        lifter.intakeStop();
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineToLinearHeading(new Pose2d(0, 17, -Math.toRadians(90)))
