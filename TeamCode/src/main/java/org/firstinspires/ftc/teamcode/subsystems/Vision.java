@@ -90,11 +90,8 @@ public class Vision {
     @SuppressLint("DefaultLocale")
     public boolean ducktective() {
         FtcDashboard dashboard = FtcDashboard.getInstance();
-        // dashboard.setTelemetryTransmissionInterval(25);
-
 
         boolean duckDetected = false;
-
         long DETECTION_TIME = 1000; // How long we give it to determine whether or not there is a duck
         long startTimeMillis = System.currentTimeMillis();
         long deadline = startTimeMillis + DETECTION_TIME;
@@ -166,7 +163,7 @@ public class Vision {
         Log.d("packageName: ", packageName);
 
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(viewId);
-        tfodParameters.minResultConfidence = 0.8f; // It was already set to 0.4f when we instantiated it. Why are we increasing it?
+        tfodParameters.minResultConfidence = 0.75f; // It was already set to 0.4f when we instantiated it. Why are we increasing it?
                                                    // Are we not satisfied with 40% confidence?
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;

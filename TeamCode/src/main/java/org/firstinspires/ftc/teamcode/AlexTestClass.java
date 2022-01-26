@@ -26,7 +26,7 @@ public class AlexTestClass extends LinearOpMode {
 
         while (!isStopRequested()) {
             if (gamepad1.x) {
-                lifter.barf();
+                lifter.barf(1);
             }
 
             if (gamepad1.y) {

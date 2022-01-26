@@ -52,7 +52,7 @@ public class BlueWarehouse extends LinearOpMode {
             duckSecond = vision.ducktective();
         }
 
-        sleep(8000);
+        // sleep(8000);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineToLinearHeading(new Pose2d(23, -30, 0))
@@ -73,7 +73,7 @@ public class BlueWarehouse extends LinearOpMode {
                 .build());
         sleep(1000);
 
-        lifter.barf();
+        lifter.barf(0.8);
         sleep(500);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())

@@ -65,7 +65,9 @@ public class Teleop extends LinearOpMode {
             if (gamepad2.left_trigger > 0.1) {
                 lifter.eat();
             } else if (gamepad2.right_trigger > 0.1) {
-                lifter.barf();
+                lifter.barf(1);
+            } else if (gamepad2.right_bumper) {
+                lifter.barf(0.5);
             } else {
                 lifter.intakeStop();
             }

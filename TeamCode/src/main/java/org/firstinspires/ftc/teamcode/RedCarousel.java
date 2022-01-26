@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.drive.BaseBotMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.DriveFactory;
@@ -71,7 +72,7 @@ public class RedCarousel extends LinearOpMode {
                 .build());
         sleep(1000);
 
-        lifter.barf();
+        lifter.barf(0.8);
         sleep(500);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
@@ -84,6 +85,7 @@ public class RedCarousel extends LinearOpMode {
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
                 .lineToLinearHeading(new Pose2d(0, 17, -Math.toRadians(90)))
                 .build());
+        carousel.setDirection(DcMotorSimple.Direction.REVERSE);
         carousel.PowerOn();
         sleep(4200);
         carousel.PowerOff();

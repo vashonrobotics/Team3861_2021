@@ -94,8 +94,7 @@ public class BradenTestAutoOp extends LinearOpMode {
                 .build());
         sleep(1000);
 
-        lifter.barf();
-        lifter.barf();
+        lifter.barf(1);
         sleep(500);
 
         drive.followTrajectory(drive.trajectoryBuilder(drive.getPoseEstimate())
